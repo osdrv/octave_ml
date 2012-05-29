@@ -62,12 +62,35 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+num_labels;
+size( X );
+size( y );
+size( lambda );
 
+% Y formalization here
+y_0 = zeros( num_labels, 1 );
+Y = zeros( size( y, 1 ), num_labels );
+for l = 1:size( y, 1 )
+  Y( l, y( l ) ) = 1;
+end
 
+% H_theta computation here
+A1 = [ ones( 1, size( X, 1 ) ); X' ];
+Z2 = Theta1 * A1;
+A2 = [ ones( 1, size( Z2, 2 )); sigmoid( Z2 ) ];
+Z3 = Theta2 * A2;
+A3 = sigmoid( Z3 );
+H_theta = A3';
 
+%size( H_theta )
+%size( Y )
 
+for i = 1:m
+  J += Y( i, : ) * log( H_theta( i, : )' );
+  J += ( 1 .- Y( i, : ) ) * log( ( 1 .- H_theta( i, : ) )' );
+end
 
-
+J /= -m;
 
 
 
