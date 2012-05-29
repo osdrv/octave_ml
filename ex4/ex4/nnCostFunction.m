@@ -92,8 +92,7 @@ end
 
 J /= -m;
 
-
-
+J += lambda / ( 2 * m ) * ( sum( Theta1( :, 2:end )(:) .^2 ) + sum( Theta2( :, 2:end )(:) .^2 ) );
 
 
 
