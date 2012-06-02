@@ -94,13 +94,28 @@ J /= -m;
 
 J += lambda / ( 2 * m ) * ( sum( Theta1( :, 2:end )(:) .^2 ) + sum( Theta2( :, 2:end )(:) .^2 ) );
 
+for t = 1:m
+  a1 = [ 1; ( X( t, : ) )' ];
+  z2 = Theta1 * a1;
+  a2 = [ ones( 1, size( z2, 2 )); sigmoid( z2 ) ];
+  z3 = Theta2 * a2;
+  a3 = sigmoid( z3 );
+  delta3 = a3 - ( Y( t, : ) )';
+  delta2 = ( ( Theta2' * delta3 )( 2:end, : ) .* sigmoidGradient( z2 ) );
+  Theta1_grad += delta2 * a1';
+  Theta2_grad += delta3 * a2';
+end
 
+Theta1_grad /= m;
+Theta2_grad /= m;
 
+Theta1_tmp = Theta1;
+Theta1_tmp( :, 1 ) = 0;
+Theta2_tmp = Theta2;
+Theta2_tmp( :, 1 ) = 0;
 
-
-
-
-
+Theta1_grad += lambda / m * Theta1_tmp;
+Theta2_grad += lambda / m * Theta2_tmp;
 
 % -------------------------------------------------------------
 

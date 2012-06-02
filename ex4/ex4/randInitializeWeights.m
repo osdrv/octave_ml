@@ -21,9 +21,11 @@ W = zeros(L_out, 1 + L_in);
 
 
 
+epsilon_init = sqrt( 6 ) / sqrt( L_in + L_out );
 
+epsilon_init
 
-
+W = rand( L_out, 1 + L_in ) * epsilon_init - epsilon_init;
 
 
 
