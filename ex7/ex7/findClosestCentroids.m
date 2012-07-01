@@ -21,7 +21,19 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
+for i = 1:size( X, 1 )
+  x = X( i, : );
+  min_pos = 1;
+  min_dispose = norm( X( i, : ) - centroids( 1, : ) );
+  for j = 1:K
+    dispose = norm( x - centroids( j, : ) );
+    if dispose < min_dispose
+      min_dispose = dispose;
+      min_pos = j;
+    end
+  end
+  idx( i ) = min_pos;
+end
 
 
 
