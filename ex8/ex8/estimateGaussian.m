@@ -24,8 +24,14 @@ sigma2 = zeros(n, 1);
 
 
 
+mu = 1 / m * sum( X );
 
+muX = zeros( m, n );
+for i = 1:m
+  muX( i, : ) = mu;
+end
 
+sigma2 = 1 / m * sum( ( X - muX ) .^ 2 );
 
 
 

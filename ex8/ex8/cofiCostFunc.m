@@ -41,17 +41,13 @@ Theta_grad = zeros(size(Theta));
 %
 
 
+D = R .* ( X * Theta' - Y );
 
+J = .5 * sum( sumsq( D(:) ) ) + lambda / 2 * sum( sumsq( Theta( 1:num_users, 1:num_features )(:) ) ) + lambda / 2 * sum( sumsq( X( 1:num_movies, 1:num_features )(:) ) );
 
+X_grad = ( D * Theta ) + lambda * X;
 
-
-
-
-
-
-
-
-
+Theta_grad = ( D' * X ) + lambda * Theta;
 
 
 
